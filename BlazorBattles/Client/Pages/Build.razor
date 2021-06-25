@@ -27,18 +27,18 @@
 @code {
 
     int selectedUnitId = 1;
-    bool needMoreBananas = false;
+   // bool needMoreBananas = false;
     public void BuildUnit()
     {
         var selectedUnit = UnitService.Units.FirstOrDefault(unit => unit.Id == selectedUnitId);
 
         if(BananaService.Bananas < selectedUnit.BananaCost)
         {
-            needMoreBananas = true;
+           // needMoreBananas = true;
             ToastService.ShowError("Not enough Bananas","Error building a unit");
             return;
         }
-        needMoreBananas = false;
+      //  needMoreBananas = false;
 
         BananaService.SpendBananas(selectedUnit.BananaCost);
         UnitService.AddUnit(selectedUnitId);
