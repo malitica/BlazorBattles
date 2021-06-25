@@ -1,9 +1,28 @@
-﻿<div class="top-menu">
-    <img src="Icons/rsz_1mataicon.png" />
-    @Matas
+﻿@inject IBananaService BananaService
+@implements IDisposable
+
+<div class="top-menu">
+    <img src="Icons/banana.png" />
+    <span class="popover-header">
+        @BananaService.Bananas
+    </span>
+   <AddBananas></AddBananas>
 </div>
 
 
 @code {
-    public int Matas { get; set; } = 100;
+  
+
+    protected override void OnInitialized()
+    {
+        BananaService.OnChange += StateHasChanged;
+    }
+
+
+    public void Dispose()
+    {
+        BananaService.OnChange -= StateHasChanged;
+    }
+
+    
 }

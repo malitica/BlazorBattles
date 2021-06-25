@@ -1,0 +1,38 @@
+﻿@page "/login"
+
+@if (IsAuthenticated)
+{
+    <h3>Welcome @User.UserName</h3>
+}
+else
+{
+    <h3>Login</h3>
+    <EditForm Model="User" OnValidSubmit="HandleLogin">
+        <DataAnnotationsValidator></DataAnnotationsValidator>
+        <div class="form-group">
+            <label for="username">Username</label>
+            <InputText id="username" @bind-Value="User.UserName" class="form-control"></InputText>
+        </div>
+
+        <div class="form-group">
+            <label for="password">Password</label>
+            <InputText id="password" @bind-Value="User.Password" class="form-control" type="password"></InputText>
+        </div>
+        <button type="submit" class="btn btn-primary">Login</button>
+        <ValidationSummary></ValidationSummary>
+    </EditForm>
+}
+
+
+@code {
+    private UserLogin User = new UserLogin();
+
+    bool IsAuthenticated = false;
+
+
+    private void HandleLogin()
+    {
+        Console.WriteLine($"{User.UserName} // {User.Password}");
+        IsAuthenticated = true;
+    }
+}
